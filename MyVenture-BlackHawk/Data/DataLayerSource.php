@@ -14,6 +14,10 @@ class MBlog
 	
 		public function tes2(){
 	}
+	
+	
+		public function tes3(){
+	}
 
 
 }
