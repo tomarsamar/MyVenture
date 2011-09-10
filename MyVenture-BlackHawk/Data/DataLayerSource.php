@@ -5,7 +5,7 @@ class MBlog
 {
 	public function GetMySubscribedMBlogs($uid)
 	{
-			return "testing";// testing the comments - changed at git hub site
+			return "testing";// testing the comments - changed at git hub site // new second comment
 	}
 
 	public function test(){
