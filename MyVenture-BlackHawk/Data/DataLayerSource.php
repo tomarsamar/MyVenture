@@ -10,6 +10,11 @@ class MBlog
 
 	public function test(){
 	}
+	
+	
+		public function tes2(){
+	}
+
 
 }
 
