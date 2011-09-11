@@ -9,6 +9,7 @@ class MBlog
 	}
 
 	public function test(){
+		
 	}
 	
 	
