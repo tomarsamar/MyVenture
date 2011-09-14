@@ -50,7 +50,7 @@ class BusinessEngine
      * @param  Integer UID
      * @return mixed
      */
-    public function GetMySubscribedMBlogs()( Integer $UID)
+    public function GetMySubscribedMBlogs( Integer $UID)
     {
         // section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097F begin
         // section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097F end
