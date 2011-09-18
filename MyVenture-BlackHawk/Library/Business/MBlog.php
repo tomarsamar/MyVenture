@@ -1,7 +1,7 @@
 <?php
 namespace MyVenture\Business;
 
-require_once '../Data/MBlog.php';
+require_once '../../Library/Data/MBlog.php';
 
 class MBlog{
 	
@@ -19,9 +19,12 @@ public function PublishBlog($UID,$Content)
 	
 public function GetMySubscribedMBlogs($UID)
 {
+	//echo "in business MBlog";
 	
-	 return new \MyVenture\Data\D_MBlog();
-		
+	 $obj= new \MyVenture\Data\MBlog();
+	 
+	return  $obj->GetMySubscribedMBlogs($UID);
+	 	
 }
 	
 	

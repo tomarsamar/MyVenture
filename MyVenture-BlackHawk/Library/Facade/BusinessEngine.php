@@ -6,8 +6,8 @@ namespace MyVenture\Facade;
 
 use MyVenture\Contracts\ICommonFacade;
 
-require_once '../Contracts/ICommonFacade.php';
-require_once '../Business/MBlog.php';
+require_once '../../Library/Contracts/ICommonFacade.php';
+require_once '../../Library/Business/MBlog.php';
 
 /**
  * Short description of class BusinessEngine
@@ -44,7 +44,7 @@ class BusinessEngine implements ICommonFacade
      * @param  Integer UID
      * @return mixed
      */
-    public function GetMyFollowers( Integer $UID)
+    public function GetMyFollowers($UID)
     {
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000982 begin
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000982 end
@@ -58,7 +58,7 @@ class BusinessEngine implements ICommonFacade
      * @param  Integer UID
      * @return mixed
      */
-    public function GetWhoIFollow( Integer $UID)
+    public function GetWhoIFollow($UID)
     {
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000985 begin
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000985 end
@@ -73,7 +73,7 @@ class BusinessEngine implements ICommonFacade
      * @param  String content
      * @return mixed
      */
-    public function PublishMBlog( Integer $UID,  String $content)
+    public function PublishMBlog($UID,$content)
     {
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000988 begin
         // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000988 end

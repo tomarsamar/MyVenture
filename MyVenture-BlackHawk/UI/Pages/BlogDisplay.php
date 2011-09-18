@@ -11,19 +11,28 @@
         
         <?php
         
-        require_once '../../Library/Contracts/ICommonFacade.php';
-        require_once '../../Library/Factory/CommonFactory.php';
+      require_once '../../Library/Contracts/ICommonFacade.php';
+       require_once '../../Library/Factory/CommonFactory.php';
         
         
         
-       $commonFactoryObj= new MyVenture/Factory/CommonFactory();
+        
+       $commonFactoryObj = new \MyVenture\Factory\CommonFactory();
        
-       $commonServiceFacade=$commonFactoryObj->GetCommonServiceFacade();
+       $commonServiceFacade = $commonFactoryObj->GetCommonServiceFacade();
        
-              
-    	$arry = $commonServiceFacade->GetMySubscribedMBlogs(123);
+    
+      
+       
+   		$arry = $commonServiceFacade->GetMySubscribedMBlogs(123);
     	
-        for($i=0;$i < $arry->count() ; $i++ )
+   		
+   		
+   		
+   		$arry -> rewind();
+    	
+    	
+      while($arry->valid())
         {
         
         ?>
@@ -34,15 +43,21 @@
 	       		<img alt="" src="../Image/007.jpg"  style="height:48px;width:48px">
 	       	</div>
 	       	<div class="fltrt" style="height:50px;width:526px;  ">
-		       	<div><span style="font-weight:bold;font-family:Helvetica;"> <?php $arry[$i]->$authorName ?> </span></div>	
-		       	<div  style="font-family:Helvetica;"><?php $arry[$i]->$Content ?>  	</div>	
+		       	<div><span style="font-weight:bold;font-family:Helvetica;"> <?php  $obj_t= $arry->current();
+		       	
+		  		  echo   	$obj_t->authorName;
+		       	    	
+					//echo get_class($obj_t); //MBlog
+		  		  
+		       	    ?> </span></div>	
+		       	<div  style="font-family:Helvetica;"><?php echo $obj_t->Content;  $arry->next(); ?>  	</div>	
 	       	</div>
 	       	<div class="clearfloat"></div>
 	       	
        </div>
        
        <div style="height: 10px;" ></div>
-       <?php }?>
+       <?php  }?>
        
        </div>
        

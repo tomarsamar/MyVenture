@@ -1,4 +1,4 @@
 <?php
 
-define('Global_Config_IsInDebug', true);
+define('Global_Config_IsInDebug', false);
 

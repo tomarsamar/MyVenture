@@ -17,6 +17,8 @@
   
   	<?php 
   	
+  		
+  	
       	require_once 'Page.php';
       	require_once '../../Config/GlobalConfig.php';
       	
@@ -24,8 +26,6 @@
       	try{
       		
       		get_Conten();
-      		
-      		
       		
       	}
       	catch(Exception  $ex)

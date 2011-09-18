@@ -4,7 +4,7 @@
 namespace MyVenture\Data;
 
 
-require_once '../Entities/Mblog.php';
+require_once '../../Library/Entities/Mblog.php';
 class MBlog
 {
 	
@@ -24,27 +24,33 @@ class MBlog
 	 * */
 	public function GetMySubscribedMBlogs($UID)
 	{
-		$array_MBlog=new ArrayObject();
+		//echo "in data layer";
 		
-		for($i=0;$i < 5 ; $i++){
+		$array_MBlog = new \SplObjectStorage();
+
+			for($i=0; $i < 5 ; $i++){
 			
-			$obj= new MyVenture\Entities\MBlog();
+			$obj= new \MyVenture\Entities\MBlog();
+			
+			$obj->authorName ="ksdjsada";
 			
 			$obj->Content = "teting the fuck";
 			
 			$obj->ID = $i;
 			
-			$obj->UID = $i++;
+			$obj->UID = $i + 1;
 			
-			$array_MBlog->append($obj);
+			$array_MBlog ->attach($obj);
 			
 		}
 		
-		$con = mysql_connect("localhost","root","kob115");
-		if (!$con)
-		{
-			die('Could not connect: ' . mysql_error());
-		}
+		//$con = mysql_connect("localhost","root","kob115");
+		//if (!$con)
+	//	{
+		//	die('Could not connect: ' . mysql_error());
+		//}
+		
+		return $array_MBlog;
 		
 	}
 	

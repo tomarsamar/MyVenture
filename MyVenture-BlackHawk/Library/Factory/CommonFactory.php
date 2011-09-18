@@ -2,14 +2,17 @@
 
 namespace MyVenture\Factory;
 
-require_once '../Service/PrimaryServiceEngine.php';
+require_once '../../Library/Service/PrimaryServiceEngine.php';
+
+
 
 class CommonFactory{
 	
 	function GetCommonServiceFacade()
 	{
+		$obj= new \MyVenture\Service\PrimaryServiceEngine();
 		
-		return new MyVenture\Service\PrimaryServiceEngine();
+		return $obj;
 		
 	}
 	
