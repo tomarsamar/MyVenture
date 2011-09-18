@@ -1,5 +1,8 @@
 <?php
 
+
+namespace MyVenture\Facade;
+
 error_reporting(E_ALL);
 
 /**
