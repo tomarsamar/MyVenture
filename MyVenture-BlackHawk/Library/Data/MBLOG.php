@@ -5,6 +5,7 @@ namespace MyVenture\Data;
 
 
 require_once '../../Library/Entities/Mblog.php';
+require_once '../../Library/Data/DataBlock/mysqldatabase.php';
 class MBlog
 {
 	
@@ -64,13 +65,24 @@ class MBlog
 	private function GetResult($query)
 	{
 		
+		/*$db = MySqlDatabase::getInstance();
+		
+		  //try {
+			      $db->connect(Global_Config_DatabaseServerName,Global_Config_DatabaseServerUserId, Global_Config_DatabaseServerPassword, Global_Config_DataBaseName);
+			  }
+			  catch (Exception $e) {
+				      die($e->getMessage());
+			}
+		
+			
+			$db->query($query); */
+		
 		$result;
 		
 		$this->con = mysql_connect(Global_Config_DatabaseServerName,Global_Config_DatabaseServerUserId,Global_Config_DatabaseServerPassword);
 		
 		if (!$this->con)
 		{
-				
 			//echo "not connected";
 			die('Could not connect: ' . mysql_error());
 		}

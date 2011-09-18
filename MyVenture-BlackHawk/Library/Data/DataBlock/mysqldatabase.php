@@ -2,7 +2,7 @@
 /**
  *  @package    mysql-database
  */
-
+		//copied from http://www.micahcarrick.com/php5-mysql-database-class.html
 /**
  *  MySQL Database
  *
