@@ -3,32 +3,8 @@
 
 namespace MyVenture\Facade;
 
-error_reporting(E_ALL);
 
-/**
- * untitledModel - \class.BusinessEngine.php
- *
- * $Id$
- *
- * This file is part of untitledModel.
- *
- * Automatically generated on 12.09.2011, 11:18:07 with ArgoUML PHP module 
- * (last revised $Date: 2010-01-12 20:14:42 +0100 (Tue, 12 Jan 2010) $)
- *
- * @author firstname and lastname of author, <author@example.org>
- */
-
-if (0 > version_compare(PHP_VERSION, '5')) {
-    die('This file was generated for PHP 5');
-}
-
-/* user defined includes */
-// section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097B-includes begin
-// section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097B-includes end
-
-/* user defined constants */
-// section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097B-constants begin
-// section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097B-constants end
+require_once '../Contracts/ICommonFacade.php';
 
 /**
  * Short description of class BusinessEngine
@@ -36,14 +12,8 @@ if (0 > version_compare(PHP_VERSION, '5')) {
  * @access public
  * @author firstname and lastname of author, <author@example.org>
  */
-class BusinessEngine
+class BusinessEngine implements ICommonFacade
 {
-    // --- ASSOCIATIONS ---
-
-
-    // --- ATTRIBUTES ---
-
-    // --- OPERATIONS ---
 
     /**
      * Short description of method GetMySubscribedMBlogs()
