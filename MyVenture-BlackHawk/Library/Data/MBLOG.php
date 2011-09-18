@@ -9,10 +9,13 @@ class MBlog
 {
 	
 	
+	private $con;
+	
+	
 	public function PublishBlog($UID,$Content)
 	{
 	
-	
+		
 	
 	}
 	
@@ -28,29 +31,59 @@ class MBlog
 		
 		$array_MBlog = new \SplObjectStorage();
 
-			for($i=0; $i < 5 ; $i++){
+		$result = $this->GetResult("select * from mblog");
+				if($result)
+				{
+					while ($row = mysql_fetch_assoc($result)) {
+						
+						$obj= new \MyVenture\Entities\MBlog();
+							
+						$obj->authorName = $row['Category'];
+							
+						$obj->Content = $row['Content'];;
+							
+						$obj->ID = $row['id'];;
+							
+						$obj->UID = $row['UID'];;
+							
+						$array_MBlog ->attach($obj);
+						
+						
+					}
+					
+					mysql_free_result($result);
+				}
 			
-			$obj= new \MyVenture\Entities\MBlog();
-			
-			$obj->authorName ="ksdjsada";
-			
-			$obj->Content = "teting the fuck";
-			
-			$obj->ID = $i;
-			
-			$obj->UID = $i + 1;
-			
-			$array_MBlog ->attach($obj);
-			
+			mysql_close($this->con);
+		
+			return $array_MBlog;
+		
+	}
+	
+	
+	private function GetResult($query)
+	{
+		
+		$result;
+		
+		$this->con = mysql_connect(Global_Config_DatabaseServerName,Global_Config_DatabaseServerUserId,Global_Config_DatabaseServerPassword);
+		
+		if (!$con)
+		{
+				
+			//echo "not connected";
+			die('Could not connect: ' . mysql_error());
+		}
+		else{
+			echo "connected ";
+				
+			mysql_select_db(Global_Config_DataBaseName,$con);
+				
+			$result = mysql_query($query,$con);
 		}
 		
-		//$con = mysql_connect("localhost","root","kob115");
-		//if (!$con)
-	//	{
-		//	die('Could not connect: ' . mysql_error());
-		//}
 		
-		return $array_MBlog;
+	return 	$result;
 		
 	}
 	

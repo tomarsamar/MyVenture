@@ -1,6 +1,8 @@
 <?php
 namespace MyVenture\Business;
 
+//spl_autoload_call("\MyVenture\Data\MBlog");
+
 require_once '../../Library/Data/MBlog.php';
 
 class MBlog{
