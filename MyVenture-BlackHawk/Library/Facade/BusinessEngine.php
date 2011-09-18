@@ -4,7 +4,10 @@
 namespace MyVenture\Facade;
 
 
+use MyVenture\Contracts\ICommonFacade;
+
 require_once '../Contracts/ICommonFacade.php';
+require_once '../Business/MBlog.php';
 
 /**
  * Short description of class BusinessEngine
@@ -23,10 +26,14 @@ class BusinessEngine implements ICommonFacade
      * @param  Integer UID
      * @return mixed
      */
-    public function GetMySubscribedMBlogs( Integer $UID)
+    public function GetMySubscribedMBlogs($UID)
     {
-        // section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097F begin
-        // section -64--88-52-1--43214224:1325c0244f0:-8000:000000000000097F end
+      
+   		 $mBlogObj=new \MyVenture\Business\MBlog();
+    	    	
+    	return $mBlogObj->GetMySubscribedMBlogs($UID);
+    	
+    	
     }
 
     /**

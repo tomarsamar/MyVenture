@@ -23,7 +23,6 @@
       	       	 
       	try{
       		
-      		throw new Exception('testing exception');
       		get_Conten();
       		
       		

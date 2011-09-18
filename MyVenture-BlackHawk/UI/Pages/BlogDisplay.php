@@ -11,16 +11,17 @@
         
         <?php
         
-        require_once '../../Library/Contracts/CommonFacade.php';
+        require_once '../../Library/Contracts/ICommonFacade.php';
         require_once '../../Library/Factory/CommonFactory.php';
         
         
         
-       $commonFactoryObj= new \MyVenture\Factory\CommonFactory();
+       $commonFactoryObj= new MyVenture/Factory/CommonFactory();
        
        $commonServiceFacade=$commonFactoryObj->GetCommonServiceFacade();
        
-    	$arry = $obj->GetMySubscribedMBlogs(123);
+              
+    	$arry = $commonServiceFacade->GetMySubscribedMBlogs(123);
     	
         for($i=0;$i < $arry->count() ; $i++ )
         {

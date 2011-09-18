@@ -7,6 +7,6 @@ function get_Conten()
 	 * */
    $page=isset($_GET["Page"]) ? $page : "BlogDisplay.php";
    
-return require_once $page;
+	return require_once $page;
 	
 }
