@@ -1,8 +1,14 @@
 1.	Create table  User (Uid BIGINT  PRIMARY KEY,MailId  VARCHAR(300) not null,Pass  VARCHAR(100)) 
+
 2.	Create table  AdContainer (id BIGINT  PRIMARY KEY,URL  VARCHAR(500) not null,PaymentInfo  VARCHAR(500),Category VARCHAR(200)) 
-3.	Create table  MBlog (id BIGINT  PRIMARY KEY,Content  VARCHAR(300) not null,UID  BIGINT,Category VARCHAR(200)) 
+
+3.	Create table  MBlog (id BIGINT  AUTO_INCREMENT PRIMARY KEY,Content  VARCHAR(300) not null,UID  BIGINT,Category VARCHAR(200)) 
+
 4.	Create table  Click_Info (id BIGINT  PRIMARY KEY,UID  BIGINT,NumberOfClicks  int,AdId BIGINT) 
+
+
 5.	Create table  PaymentInfo(id BIGINT  PRIMARY KEY,UID  BIGINT,DateOfPayment  DateTime,Amount  int,ClickInf_Id_Pyed varchar(5000)) 
+
 6.	Create table  Connections(UID BIGINT  ,Followers  varchar(8000),Following varchar
 (8000)) 
 
