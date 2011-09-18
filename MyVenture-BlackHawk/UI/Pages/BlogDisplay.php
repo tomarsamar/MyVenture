@@ -1,13 +1,25 @@
-	<div>
-		<div><span style="font-family: Helvetica; font-weight: bold;color: #999;" >Whats in your Mind : </span></div>
+	
+	<style type="text/css">
+	
+		.MBlogBox
+		{
+			border-radius:10px;
+			height: 200px;
+		}
+	
+	
+	</style>
+	
+	<div id="MBlogBox" class="MBlogBox" >
+		<div><span style="font-family: Helvetica; font-weight: bold;color: #999;margin-left: 5px;" >Whats in your Mind : </span></div>
     	<div> 
     		<div class="fltlft"><textarea rows="4" style="width:522px;margin-left: 2px;" ></textarea> </div>
     		<div class="fltrt" style="margin-left: 1px;"><input type="button" value="Update" style="height: 70px;color: #999;" /></div>
     		<div class="clearfloat"></div>
        	</div>
-        </div>
+   </div>
         
-        <div style="height: 50px;" ></div>
+        <div style="height: 15px;background-color: #000" ></div>
         
         <?php
         

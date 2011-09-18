@@ -87,7 +87,7 @@ class MBlog
 			die('Could not connect: ' . mysql_error());
 		}
 		else{
-			echo "connected ";
+			//echo "connected ";
 				
 			mysql_select_db(Global_Config_DataBaseName,$this->con);
 				
