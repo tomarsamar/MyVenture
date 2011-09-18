@@ -68,7 +68,7 @@ class MBlog
 		
 		$this->con = mysql_connect(Global_Config_DatabaseServerName,Global_Config_DatabaseServerUserId,Global_Config_DatabaseServerPassword);
 		
-		if (!$con)
+		if (!$this->con)
 		{
 				
 			//echo "not connected";
@@ -77,9 +77,9 @@ class MBlog
 		else{
 			echo "connected ";
 				
-			mysql_select_db(Global_Config_DataBaseName,$con);
+			mysql_select_db(Global_Config_DataBaseName,$this->con);
 				
-			$result = mysql_query($query,$con);
+			$result = mysql_query($query,$this->con);
 		}
 		
 		
