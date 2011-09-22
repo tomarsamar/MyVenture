@@ -4,8 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 
-<link href="../CSS/Main.css" rel="stylesheet" type="text/css" />
+
 <link href="../../public/CSS/Main.css" rel="stylesheet" type="text/css" />
+<script src="../../public/scripts/jquery-1.6.4.js"  type="text/javascript" ></script>
+
+
 </head>
 
 <body>
