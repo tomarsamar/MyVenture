@@ -60,14 +60,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 
 .content {
 
-	margin: 5px 100px 0px 0px;
-	
-	width: 600px;
-	height:500px;
+	margin: auto;
+	border-radius:5px;
+	width: 1024px;
+	height:550px;
 	background: #FFF;
-	
-	float:right;
-	overflow:auto; 
+	 
 }
 
 /* ~~ The footer ~~ */

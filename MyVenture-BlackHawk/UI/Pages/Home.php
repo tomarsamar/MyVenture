@@ -5,6 +5,7 @@
 <title>Untitled Document</title>
 
 <link href="../CSS/Main.css" rel="stylesheet" type="text/css" />
+<link href="../../public/CSS/Main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -12,6 +13,7 @@
 <div class="container">
   <div class="header">
        <!-- end .header --></div>
+   
   <div class="content">
   
   
