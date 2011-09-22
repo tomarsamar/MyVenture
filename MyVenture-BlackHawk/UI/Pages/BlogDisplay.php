@@ -119,6 +119,7 @@
 
 		
 		  var text=$("#txtArea_MBlog").val();
+		  $("#txtArea_MBlog").val("");
 		
 		this.AddMBlog(text,"Paras","../../public/Image/007.jpg");
 		
