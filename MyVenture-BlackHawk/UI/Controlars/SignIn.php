@@ -66,44 +66,47 @@ border: 1px solid #E5E5E5;
 
 </style>
 <div id="outerContentPane">
-    <div id="leftPane" class="leftPane">
-   	   
-	</div>
-
- <div  id="RightPane" class="righttPane">
- 
- 	<form action="Home.php?Controlar=SignIn&action=login&Param=1" method="post">
-	   <div id="textBoxHolder" class="LoginBox">
-	   	
-	   		<h2>
-	   		Sign In
-	   		</h2>
-	   		
-    		<label>
-	    		<strong class="textboxLabel">Email Id </strong>
-	    		<input type="text" id="txt_UserName"  />
-	    	</label>
-    		<label>
-    			<strong class="textboxLabel">Password </strong>
-    			<input type="password" id="txt_Pass"  />
-    		</label>
-    		<input type="submit" id="btn_SignIn" value="Sign In"  />
-        </div>
-        </form>
-
-	<?php
+<div id="leftPane" class="leftPane">
 	
-	require_once '../../Library/Contracts/ICommonFacade.php';
-	require_once '../../Library/Factory/CommonFactory.php';
-	        
-	        $commonFactoryObj = new \MyVenture\Factory\CommonFactory();
-	       
-			$commonServiceFacade = $commonFactoryObj->GetCommonServiceFacade();
-	 
-			$arry = $commonServiceFacade->GetMySubscribedMBlogs(123);
-	 
-			$arry -> rewind();
-	 
+</div>
+
+<div  id="RightPane" class="righttPane">
+
+<?php 
+
+
+class SignIn{
+	
+	
+function Execute($action)
+{
+	$action=isset($_GET["Action"]) ? $_GET["Action"] : "none";
+}
+	
+}
+
+$SignIn_obj=new SignIn();
+
+//main 
+
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
+
+// validate action so as to default to the login screen
+if ( !in_array($action, array('logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'login'), true))
+	$action = 'login';
+
+
+
+switch($action){
+	
+	case 'login':
+		get_view('LoginView');
+	break;
+	
+	case 'logout':
+			echo "teting the actions";
+	break;
+}
 	?>
 		</div> <!--  end Right  Pane -->
 </div> <!--  end outer content Pane -->

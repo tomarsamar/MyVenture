@@ -21,12 +21,13 @@
   
   
   	<?php 
-  	  	require_once 'Page.php';
-      	require_once '../../Config/GlobalConfig.php';
+  	  	
+      	require_once '../../GlobalConfig.php';
+      	require_once '../../Global/GlobalFunctions.php';
       	       	 
       	try{
       		
-      		get_Conten();
+      		get_Controlar();
       		
       	}
       	catch(Exception  $ex)
