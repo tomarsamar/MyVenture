@@ -45,11 +45,36 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 
 /* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
 .header {
+	
 	background:#000;
 	height:50px;
 	width:100%;
 	
 
+}
+
+.leftPane{
+
+width:501px;
+float: left;
+
+}
+
+.righttPane{
+ float: right;
+ height:550px;
+ width:518px;
+ margin: 0 2px;
+ 
+}
+
+
+html{
+
+font:81.25% arial, helvetica, sans-serif;
+color: #333;
+line-height: 1;
+direction: ltr;
 }
 
 /* ~~ This is the layout information. ~~ 
@@ -71,7 +96,10 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 /* ~~ The footer ~~ */
 .footer {
 	
-	height:50px;
+	background:#000;
+	height:48px;
+	width:100%;
+	
 }
 
 /* ~~ miscellaneous float/clear classes ~~ */

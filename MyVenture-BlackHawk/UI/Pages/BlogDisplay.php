@@ -7,13 +7,69 @@
 			height: 120px;
 			background-color:#EDEBD5;
 		}
-		#MblogContainer{
+		
+		
+		.MBlogTemplate{
+				border-bottom-color: #999;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
 		}
+		
+		.MBlogTemplate .BlogContent{
+		
+			font-family:Helvetica;
+			display:block;
+		}
+		
+		.MBlogTemplate .AuthorName
+		{
+		font-weight:bold;
+		font-family:Helvetica;
+		
+		}
+		
+		#MblogContainer{
+		
+		overflow: auto;
+		height:418px;
+			
+		
+		
+		}
+		
+		.MBlogTemplate .AdContent
+		{
+			font-weight:lighter;
+			color: blue;
+			display:block;
+			margin:0 0 1.5em;
+		}
+		
+		.MBlogTemplate #BlogContentBox
+		{
+		
+			display:inline-block;
+			width:442px;
+		}
+		
+		.MBlogTemplate #imgContent ,.MBlogTemplate img
+		{
+			height:48px;
+			display:inline-block;
+			width:48px;
+			vertical-align:top;
+			margin: .25em;
+		}
+	.righttPane{
 	
+		border-left-color: #999;
+			border-left-style: solid;
+			border-left-width: 1px;
+	}
 	
 	</style>
 <div>
-<div id="leftContent" style="float: left;">
+<div id="leftContent" class="leftPane">
    	   <div style="margin-left: 70px;margin-top: 70px;">
    	   		<table>
    	   		<tr><td><a href="#" style="TEXT-DECORATION: none">Paras</a></td></tr>
@@ -25,11 +81,11 @@
  </div>
 
 
-<div  style="float: right; background-color: #F7F5D7; border-left: 1px;;border-left-style:solid;border-left-color: #999;height:550px;border-radius:5px;">	
-	<div id="MBlogBox" class="MBlogBox" style="border-radius:5px;" >
+<div  class="righttPane">	
+	<div id="MBlogBox" class="MBlogBox" style="" >
 		<div><span style="font-family: Helvetica; font-weight: bold;color: #999;margin-left: 5px;" >Whats in your Mind : </span></div>
     	<div> 
-    		<div class="fltlft"><textarea rows="4" style="width:522px;margin-left: 2px;" id="txtArea_MBlog" maxlength="120" ></textarea> </div>
+    		<div class="fltlft"><textarea rows="4" style="width:440px;margin-left: .5em;" id="txtArea_MBlog" maxlength="120" ></textarea> </div>
     		<div class="fltrt" style="margin-left: 1px;"><input type="button" value="Update" style="height: 70px;color: #999;" onclick="javascript:BlogDisplay_Obj.PublishMBlog();" /></div>
     		<div class="clearfloat"></div>
        	</div>
@@ -52,40 +108,41 @@
    		
    		
    		$arry -> rewind();
-    	
-    	
+   		
+   		?>
+   		<div id="MblogContainer">
+    	<?php 
+   		
       	while($arry->valid())
         {
         ?>
-          <div id="MblogContainer">
-	       <div id="MBlogs">
-	       		<div  style="border-color: #999;border-width: 1px; width:100%;border-bottom-style:solid;">
-		       	<div class="fltlft" style="height:48px;width:48px;vertical-align: middle;">
-		       		<img alt="" src="../../public/Image/007.jpg"  style="height:48px;width:48px"/>
+          
+	       <div id="MBlogs" class="MBlogTemplate">
+		       	<div id="imgContent">
+		       		<img  alt="" src="../../public/Image/007.jpg" id="authorImage"  />
 		       	</div>
-		       	<div class="fltrt" style="width:560px;  ">
-			       	<div><span style="font-weight:bold;font-family:Helvetica;"> <?php  $obj_t= $arry->current();
+		       		
+		       	<div id="BlogContentBox">
+			       	
+			       		<span id="AuthorName_template" class="AuthorName"> <?php  $obj_t= $arry->current();
 			       	
 			  		  echo   	$obj_t->authorName;
 			       	    	
 						//echo get_class($obj_t); //MBlog
 			  		  
-			       	    ?> </span></div>	
-			       	<div  style="font-family:Helvetica;"><?php echo $obj_t->Content;  $arry->next(); ?>  	</div>
+			       	    ?> </span>
+			       		
+			       	<span id="BlogContent_template"  class="BlogContent"><?php echo $obj_t->Content;  $arry->next(); ?>  	</span>
 			       	
-			       	<div  style="font-family:Helvetica;"  id="Content_Template">
-			       			
-			       			<span  style="font-weight:lighter;color: blue;">Ads: Motor Car, Chair car, You N me </span>
-			       	
-			       	</div>	
+			       	<span id="AdContent_template"  class="AdContent">Ads: Motor Car, Chair car, You N me </span>
+			       		
 		       	</div>
-		       	<div class="clearfloat"></div>
-		       	
 	       </div>
 	       
-	       <div style="height: 10px;" ></div>
+	       
+	       
 	       <?php  }?>
-	       </div>
+	       
        </div>
      </div>  
   </div>
@@ -95,9 +152,10 @@
 
   BlogDisplay_Type.prototype={
 
-	AddMBlog:function (Content,AuthorName,imgPath)
+	AddMBlog:function (Content,AuthorName,imgPath,ad)
 	{
-		var templateObject = $("#MBlogs_Template");
+		debugger;
+		var templateObject = $("#MBlogs_template");
 
 		var templateObject_obj=templateObject.clone();
 		
@@ -105,13 +163,14 @@
 
 		templateObject_obj.css("display","block");
 		
-	    $("#AuthorName_Template",templateObject_obj).get(0).innerText = AuthorName;
+	    $("#AuthorName_template",templateObject_obj).get(0).innerText = AuthorName;
 
-	    $("#Content_Template",templateObject_obj).get(0).innerText = Content;
+	    $("#BlogContent_template",templateObject_obj).get(0).innerText = Content;
 
-	    $("#img_template",templateObject_obj).get(0).src = imgPath;
+	    $("#authorImage",templateObject_obj).get(0).src = imgPath;
 	
-	   
+	    $("#AdContent_template",templateObject_obj).get(0).innerText = ad;
+	    
 	    mBlogContainer.prepend(templateObject_obj);
 	
 	},PublishMBlog:function()
@@ -120,36 +179,31 @@
 		
 		  var text=$("#txtArea_MBlog").val();
 		  $("#txtArea_MBlog").val("");
-		
-		this.AddMBlog(text,"Paras","../../public/Image/007.jpg");
+		  
+	      this.AddMBlog(text,"Paras","../../public/Image/007.jpg","Ads: Motor Car, Chair car, You N me");
 		
 
 	}
-
-	}
+  };
+  
 
 	var BlogDisplay_Obj=new BlogDisplay_Type();
 	
   </script>
   
-   <div id="MBlogs_Template"  style="display:none;">
-	<div  style="border-color: #999;border-width: 1px; width:100%;border-bottom-style:solid;">
-       	<div class="fltlft" style="height:48px;width:48px;vertical-align: middle;">
-       		<img  id="img_template" alt="" src=""  style="height:48px;width:48px"/>
-       	</div>
-       	<div class="fltrt" style="width:560px;  ">
-       	<div><span style="font-weight:bold;font-family:Helvetica;" id="AuthorName_Template">
-       	 </span></div>	
-       	<div  style="font-family:Helvetica;" id="Content_Template"></div>
-       	<div  style="font-family:Helvetica;"  id="Content_Template">
-			       			
-			<span  style="font-weight:lighter;color: blue;">Ads: Motor Car, Chair car, You N me </span>
+  
+   <div id="MBlogs_template" class="MBlogTemplate" style="display:none">
+		       	<div id="imgContent">
+		       		<img  alt="" src="../../public/Image/007.jpg" id="authorImage"  />
+		       	</div>
+		       		
+		       	<div id="BlogContentBox">
 			       	
-		</div>		
-       	</div>
-       	<div class="clearfloat"></div>
-   </div>
-       <div style="height: 10px;" ></div>
-  </div>
-  
-  
+			       	<span id="AuthorName_template" class="AuthorName"> </span>
+			       		
+			       	<span id="BlogContent_template"  class="BlogContent"></span>
+			       	
+			       	<span id="AdContent_template"  class="AdContent"> </span>
+			       		
+		       	</div>
+</div>
