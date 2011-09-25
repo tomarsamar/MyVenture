@@ -23,7 +23,7 @@ margin:0 0 1.0em;
 }
 
 
-.LoginBox input[type="button"]{
+.LoginBox input[type="submit"]{
 
 margin:0 0 0 1.5em;
 height:30px;
@@ -71,6 +71,8 @@ border: 1px solid #E5E5E5;
 	</div>
 
  <div  id="RightPane" class="righttPane">
+ 
+ 	<form action="Home.php?Controlar=SignIn&action=login&Param=1" method="post">
 	   <div id="textBoxHolder" class="LoginBox">
 	   	
 	   		<h2>
@@ -85,8 +87,9 @@ border: 1px solid #E5E5E5;
     			<strong class="textboxLabel">Password </strong>
     			<input type="password" id="txt_Pass"  />
     		</label>
-    		<input type="button" id="btn_SignIn" value="Sign In"  />
+    		<input type="submit" id="btn_SignIn" value="Sign In"  />
         </div>
+        </form>
 
 	<?php
 	

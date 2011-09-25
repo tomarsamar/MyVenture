@@ -6,13 +6,13 @@
 			
 			height: 120px;
 			background-color:#EDEBD5;
+			
 		}
 		
 		
 		.MBlogTemplate{
-				border-bottom-color: #999;
-			border-bottom-style: solid;
-			border-bottom-width: 1px;
+				border-bottom: 1px solid #ebebeb;;
+		
 		}
 		
 		.MBlogTemplate .BlogContent{
