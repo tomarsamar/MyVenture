@@ -120,7 +120,7 @@ switch($action){
 		
 		
 		if($usr->Authinticated){
-			header("Location: Home.php?Controlar=BlogDisplay");/* if you prefix it with / than it will continue from root localhost/Home
+			header("Location: Home.php?Controlar=MBlogControlar");/* if you prefix it with / than it will continue from root localhost/Home
 			 if not prefic with / than it will take relative path from current page */
 		} else {
 			
