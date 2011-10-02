@@ -1,16 +1,10 @@
 <?php
-function get_View($viewName)
+function App_GetView($viewName)
 {
-	global	 $Global_Config_ApplicationPath;
-	
-	$path=$Global_Config_ApplicationPath . '/UI/View/' . $viewName . '.php';
-	
-	require_once $path;
-	
-	
+	App_LoadFile($viewName,"/UI/View/");
 }
 
-function get_Controlar()
+function App_GetControlar()
 {
 	
 	/*
@@ -20,16 +14,21 @@ function get_Controlar()
 	
 	$page=isset($_GET["Controlar"]) ? $_GET["Controlar"]  : "SignIn";
 	
-	global	 $Global_Config_ApplicationPath;
+	App_LoadFile($page,"/UI/Controlars/");
 	
-	$path=$Global_Config_ApplicationPath . '/UI/Controlars/' . $page . '.php';
-	
-	//$page=isset($_GET["Controlar"]) ? $_GET["Controlar"] . '.php' : "BlogDisplay.php";
-	 
-	return require_once $path;
 	
 }
 
+function App_LoadFile($fileName,$relativePath)
+{
+	global	 $Global_Config_ApplicationPath;
+	
+	$path=$Global_Config_ApplicationPath . $relativePath . $fileName . '.php';
+	
+	require_once $path;
+	
+	
+}
 
 
 

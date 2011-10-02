@@ -25,9 +25,10 @@
       	require_once '../../GlobalConfig.php';
       	require_once '../../Global/GlobalFunctions.php';
       	       	 
+      	
       	try{
       		
-      		get_Controlar();
+      		App_GetControlar();
       		
       	}
       	catch(Exception  $ex)

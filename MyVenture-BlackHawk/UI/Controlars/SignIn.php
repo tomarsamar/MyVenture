@@ -74,14 +74,15 @@ border: 1px solid #E5E5E5;
 
 <?php 
 
+App_LoadFile("User", "/UI/Utility/");
 
 class SignIn{
 	
 	
-function Execute($action)
-{
-	$action=isset($_GET["Action"]) ? $_GET["Action"] : "none";
-}
+	function Execute($action)
+	{
+		$action=isset($_GET["Action"]) ? $_GET["Action"] : "none";
+	}
 	
 }
 
@@ -89,23 +90,49 @@ $SignIn_obj=new SignIn();
 
 //main 
 
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'Showlogin';
 
 // validate action so as to default to the login screen
-if ( !in_array($action, array('logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'login'), true))
-	$action = 'login';
+if ( !in_array($action, array('logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'Showlogin','login'), true))
+{
+	$action = 'Showlogin';
+}
 
 
 
 switch($action){
 	
-	case 'login':
-		get_view('LoginView');
+	case 'Showlogin':
+		App_LoadFile("LoginModel", "/UI/Model/");
+		global $View_Data;
+		$View_Data = new \MyVenture\Model\LoginModel();
+		$View_Data->error = FALSE;
+		App_GetView('LoginView');
 	break;
 	
 	case 'logout':
 			echo "teting the actions";
 	break;
+	case 'login':
+		
+		$usr = new \MyVenture\Utility\User();
+		$usr->Authinticate();
+		
+		
+		if($usr->Authinticated){
+			header("Location: Home.php?Controlar=BlogDisplay");/* if you prefix it with / than it will continue from root localhost/Home
+			 if not prefic with / than it will take relative path from current page */
+		} else {
+			
+			App_LoadFile("LoginModel", "/UI/Model/");
+			global $View_Data;
+			$View_Data=new \MyVenture\Model\LoginModel();
+			$View_Data->error = TRUE;
+			$View_Data->erroMSG = Messages::$UserIdPassNotCorrect;
+			App_GetView('LoginView');
+		}
+		
+		break;
 }
 	?>
 		</div> <!--  end Right  Pane -->
@@ -116,36 +143,6 @@ switch($action){
 
   SignIn_Type.prototype={
 
-	AddMBlog:function (Content,AuthorName,imgPath)
-	{
-		var templateObject = $("#MBlogs_Template");
-
-		var templateObject_obj=templateObject.clone();
-		
-		var mBlogContainer= $("#MblogContainer");
-
-		templateObject_obj.css("display","block");
-		
-	    $("#AuthorName_Template",templateObject_obj).get(0).innerText = AuthorName;
-
-	    $("#Content_Template",templateObject_obj).get(0).innerText = Content;
-
-	    $("#img_template",templateObject_obj).get(0).src = imgPath;
-	
-	   
-	    mBlogContainer.prepend(templateObject_obj);
-	
-	},PublishMBlog:function()
-	{
-
-		
-		  var text=$("#txtArea_MBlog").val();
-		  $("#txtArea_MBlog").val("");
-		
-		this.AddMBlog(text,"Paras","../../public/Image/007.jpg");
-		
-
-	}
 
 	}
 

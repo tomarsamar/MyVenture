@@ -9,6 +9,14 @@ define('Global_Config_DatabaseServerPassword', 'kob115');
 $Global_Config_ApplicationPath=dirname(__FILE__);
 
 
+class Messages{
+	
+	public static $UserIdPassNotCorrect = "User Id or Password is not Correct";
+	
+	
+}
+
+
 
 
 
