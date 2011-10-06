@@ -2,7 +2,7 @@
 
 namespace MyVenture\Data;
 
-App_LoadFile("PDODb", "/Library/Data/DataBlock/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PDODb", "/Library/Data/DataBlock/");
 
 class User{
 	

@@ -2,8 +2,8 @@
 
 namespace MyVenture\Utility;
 
-App_LoadFile("Roles", "/UI/Utility/");
-App_LoadFile("User", "/Library/Data/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("Roles", "/UI/Utility/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("User", "/Library/Data/");
 
 
 class User
@@ -18,46 +18,53 @@ class User
  public $Authinticated = FALSE;
  
  
+ public function __construct(){
+ 	
+ 	
+ 	
+ 	if(isset($_COOKIE["authCookie"])){
+ 			
+ 		$str=$_COOKIE["authCookie"];
+ 		$atringArray=explode("~", $str);
+ 		 
+ 		$this->name =$atringArray[0];
+ 		$this->role =$atringArray[1];
+ 		$this->mailId=$atringArray[2];
+ 		$this->UId=$atringArray[3];
+ 		$this->imgURL=$atringArray[4];
+ 		$this->Authinticated = TRUE;
+ 	}
+ 	
+ }
+ 
+ 
  public function Authinticate()
  {
  	
  	//write authintication logic
  	
  	//if authinticated than set $Authinticated=true
- 	
- 	
- 	
- 	if(1==2 && isset($_COOKIE["authCookie"])){
  		
- 			$str=$_COOKIE["authCookie"];
-    		$atringArray=split("~", $str);
-    	
-    		$this->name =$atringArray[0];
-    		$this->role =$atringArray[1];
-    		$this->mailId=$atringArray[2];
-    		$this->UId=$atringArray[3];
-    		$this->imgURL=$atringArray[4];
-    		$this->Authinticated = TRUE;
-    		
+ 	$user =new \MyVenture\Data\User();
+ 	
+ 		
+ 	
+ 	$mailId=$_POST["txt_UserName"];
+ 	$pass=$_POST["txt_Pass"];
+ 	 
+ 	$array=$user->Authinticate($mailId, $pass);
+ 	
+ 	if(count($array) < 1)
+ 	{
+ 	
+ 		return $this;
+ 	
  	}
- 		$user =new \MyVenture\Data\User();
- 	 	
- 		$mailId=$_POST["txt_UserName"];
- 		$pass=$_POST["txt_Pass"];
- 		
- 		$array=$user->Authinticate($mailId, $pass);
-
- 	 	if(count($array) < 1)
- 		{
- 			
- 			return $this;
- 			
- 		}
  	
- 		print_r($array);
- 		
- 		
- 		
+ 	//print_r($array);
+ 	
+ 	
+ 	
  	$this->Authinticated = TRUE;
  	
  	$this->role=$array[0]["Role"];
@@ -70,13 +77,22 @@ class User
  	
  	setcookie("authCookie",$cookieValue,time() + 60*60*24*7);//set authintication cookie
  	
+ 	
  	return $this;
  	
  }
  
+ 
+ 
  function IsAdmin()
  {
- 	return $this->role == "Admin";
+ 	return $this->role == Roles::Admin;
+ }
+ 
+ function IsUserAuthinticated()
+ {
+ 	return $this->Authinticated;
+ 	
  }
  
 }

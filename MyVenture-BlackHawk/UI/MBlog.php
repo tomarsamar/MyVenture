@@ -15,6 +15,9 @@ public $MBlogDTO;
 public function PublishBlog($UID,$Content)
 {
 	
+	$obj= new \MyVenture\Data\MBlog();
+	
+	return  $obj->PublishBlog($UID,$Content);
 	
 	
 }

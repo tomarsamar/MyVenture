@@ -23,12 +23,13 @@
   	<?php 
   	  	
       	require_once '../../GlobalConfig.php';
-      	require_once '../../Global/GlobalFunctions.php';
+      	require_once '../../Global/Globals.php';
+      	GlobalContext::GetCurrentGlobalContext()->App_LoadFile("LoginModel", "/UI/Model/");
       	       	 
       	
       	try{
       		
-      		App_GetControlar();
+      		GlobalContext::GetCurrentGlobalContext()->App_GetControler();
       		
       	}
       	catch(Exception  $ex)

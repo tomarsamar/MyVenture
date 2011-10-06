@@ -74,7 +74,7 @@ border: 1px solid #E5E5E5;
 
 <?php 
 
-App_LoadFile("User", "/UI/Utility/");
+
 
 class SignIn{
 	
@@ -103,11 +103,10 @@ if ( !in_array($action, array('logout', 'lostpassword', 'retrievepassword', 'res
 switch($action){
 	
 	case 'Showlogin':
-		App_LoadFile("LoginModel", "/UI/Model/");
 		global $View_Data;
 		$View_Data = new \MyVenture\Model\LoginModel();
 		$View_Data->error = FALSE;
-		App_GetView('LoginView');
+		GlobalContext::GetCurrentGlobalContext()->App_GetView('LoginView');
 	break;
 	
 	case 'logout':
@@ -116,15 +115,15 @@ switch($action){
 	case 'login':
 		
 		$usr = new \MyVenture\Utility\User();
-		$usr->Authinticate();
+		$usr->Authinticate("SignIn");
 		
 		
 		if($usr->Authinticated){
-			header("Location: Home.php?Controlar=MBlogControlar");/* if you prefix it with / than it will continue from root localhost/Home
+			header("Location: Home.php?Controler=MBlogControler&UserId=$usr->UId");/* if you prefix it with / than it will continue from root localhost/Home
 			 if not prefic with / than it will take relative path from current page */
 		} else {
 			
-			App_LoadFile("LoginModel", "/UI/Model/");
+			GlobalContext::GetCurrentGlobalContext()->App_LoadFile("LoginModel", "/UI/Model/");
 			global $View_Data;
 			$View_Data=new \MyVenture\Model\LoginModel();
 			$View_Data->error = TRUE;

@@ -1,2 +1,2 @@
 <?php
-header("Location: UI/Controlars/Home.php?Controlar=SignIn");
+header("Location: UI/Controllers/Home.php?Controler=SignIn");

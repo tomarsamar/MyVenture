@@ -8,7 +8,7 @@ require_once '../../Library/Service/PrimaryServiceEngine.php';
 
 class CommonFactory{
 	
-	function GetCommonServiceFacade()
+	public static function  GetCommonServiceFacade()
 	{
 		$obj= new \MyVenture\Service\PrimaryServiceEngine();
 		

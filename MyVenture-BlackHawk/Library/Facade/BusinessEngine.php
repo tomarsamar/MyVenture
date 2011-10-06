@@ -75,8 +75,9 @@ class BusinessEngine implements ICommonFacade
      */
     public function PublishMBlog($UID,$content)
     {
-        // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000988 begin
-        // section -64--88-52-1--43214224:1325c0244f0:-8000:0000000000000988 end
+        $mBlogObj=new \MyVenture\Business\MBlog();
+    	    	
+    	return $mBlogObj->PublishMBlog($UID,$content);
     }
 
 } /* end of class BusinessEngine */

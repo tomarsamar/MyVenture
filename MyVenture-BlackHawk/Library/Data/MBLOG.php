@@ -6,6 +6,8 @@ namespace MyVenture\Data;
 
 require_once '../../Library/Entities/Mblog.php';
 require_once '../../Library/Data/DataBlock/mysqldatabase.php';
+ GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PDODb", "/Library/Data/DataBlock/");
+
 class MBlog
 {
 	
@@ -16,6 +18,12 @@ class MBlog
 	public function PublishBlog($UID,$Content)
 	{
 	
+		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call Usp_PublishBlog(:_UID,:_Content)");
+		$stat->AddInParam(":_UID",$UID);
+		$stat->AddInParam(":_Content",$Content);
+		$array=$stat->executeAll();
+		//$stat->CloaseInnerConnection();
+		return $array;
 		
 	
 	}

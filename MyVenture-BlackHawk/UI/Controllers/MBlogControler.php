@@ -176,7 +176,16 @@
 	},PublishMBlog:function()
 	{
 
+
 		
+		debugger;
+		var returnObj = $.ajax({url:"\Services\HttpService.php\action=GetArray",data:{},error:erro,async:false});
+
+		var str=$.parseJSON(returnObj.responseText);
+		var ss="";
+
+		
+		alert(str.result);
 		  var text=$("#txtArea_MBlog").val();
 		  $("#txtArea_MBlog").val("");
 		  
@@ -186,7 +195,11 @@
 	}
   };
   
+  function erro(rel,b,c)
+  {
 
+  	alert("some error happend");
+  }
 	var BlogDisplay_Obj=new BlogDisplay_Type();
 	
   </script>
