@@ -22,9 +22,15 @@ function App_GetControler()
 	
 	if($page != "SignIn" && !$this->GetCurrentUser()->IsUserAuthinticated())
 	{
-		header("Location: UI/Controllers/Home.php?Controler=SignIn");
+		
+		
+		 $URL= 'Home.php?Controler=SignIn';
+		
+		echo $URL;
+		
+		header('Location:' . $URL);
 		exit;
-
+		
 	}
 	
 	$this->App_LoadFile($page,"/UI/Controllers/");

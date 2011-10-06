@@ -6,7 +6,36 @@
  require_once '/Library/Data/DataBlock/PDODb.php';
 
  
- echo $_SERVER['HOME'];
+ 
+ $svr = $_SERVER['DOCUMENT_ROOT'] ;// $_SERVER['SCRIPT_NAME'];
+ 
+ echo $svr;
+ 
+ function getroot($root, $svr) {
+ 	if ($root!= $svr) {
+ 		$root = $svr;
+ 		$svr = preg_replace('/(\/.+\/?)/', "$2", $svr);
+ 		if ($root!= $svr) {
+ 			getroot($root, $svr);
+ 		}
+ 		else {
+ 			echo $root . '/';
+ 		}
+ 	}
+ }
+ 
+ getroot("", $svr);
+ 
+ 
+// foreach($_SERVER  as $v)
+ //{
+ 	//echo "<BR />";
+ 	//echo $v;
+ 	
+// }
+ 
+ print_r($_ENV);
+ 
  
  
  $action = isset($_GET["action"]) ? $_GET["action"] : 'Showlogin';

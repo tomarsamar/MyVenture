@@ -6,7 +6,7 @@ namespace MyVenture\Data;
 
 require_once '../../Library/Entities/Mblog.php';
 require_once '../../Library/Data/DataBlock/mysqldatabase.php';
- GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PDODb", "/Library/Data/DataBlock/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PDODb", "/Library/Data/DataBlock/");
 
 class MBlog
 {
