@@ -7,6 +7,7 @@
 
 <link href="../../public/CSS/Main.css" rel="stylesheet" type="text/css" />
 <script src="../../public/scripts/jquery-1.6.4.js"  type="text/javascript" ></script>
+<script src="../../public/scripts/json2.js"  type="text/javascript" ></script>
 
 
 </head>
@@ -27,6 +28,9 @@
       	GlobalContext::GetCurrentGlobalContext()->App_LoadFile("LoginModel", "/UI/Model/");
       	       	 
       	
+       $userDetails = json_encode(GlobalContext::GetCurrentGlobalContext()->GetCurrentUser());
+      	
+      	
       	try{
       		
       		GlobalContext::GetCurrentGlobalContext()->App_GetControler();
@@ -44,7 +48,11 @@
     	
   	
   	?>
-  
+  <script type="text/javascript">
+	debugger;
+ 	 var user_Details = $.parseJSON(' <?php echo $userDetails ?>');
+	var str="";
+  </script>
   
    </div>
 		  <div class="footer">

@@ -9,17 +9,64 @@
  
  class HttpService{
  
- 
- function PublishBlog($UID,$content)
+ 	private $action;
+ 	
+ 	function __construct($action)
+ 	{
+ 		$this->action = $action;
+ 		
+ 	}
+ 	
+ 	public function Execute()
+ 	{
+ 		
+ 		switch($action){
+ 		
+ 			case 'PublishBlog':
+ 				  
+ 				  $json=$_REQUEST['UserDetails'];
+ 				  
+ 				  $arry=json_decode($json,false,1);
+ 				  
+ 				  $HttpService_obj->PublishBlog($arry["UserId"], $arry["Content"]);
+ 				  
+ 				break;
+ 			case 'GetMySubscribedMBlogs':
+ 				
+ 				$json=$_REQUEST['UserDetails'];
+ 					
+ 				$arry=json_decode($json,false,1);
+ 				
+ 				
+ 				$arry = $this->GetMySubscribedMBlogs($arry["UserId"], $arry["LastMBlogTimeStamp"]);
+ 				
+ 				echo json_encode($arry);
+ 				
+ 				break;
+ 			case 'OperationNotFound':
+ 				echo "The requested Operation not found in service, please check operation name";
+ 				break;
+ 		}
+ 		
+ 		
+ 		
+ 	}
+ 	
+ 	function PublishBlog($UID,$content)
 	{
 	
-	$commonFacade = \MyVenture\Factory\CommonFactory::GetCommonServiceFacade();
-	$commonFacade->PublishMBlog($UID, $content);
+		$commonFacade = \MyVenture\Factory\CommonFactory::GetCommonServiceFacade();
+		$commonFacade->PublishMBlog($UID, $content);
 	
 	} 
+	
+	function GetMySubscribedMBlogs()
+	{
+		
+		
+		
+	}
  }
- 
- $HttpService_obj=new HttpService();
  
  //main
  
@@ -31,27 +78,6 @@
  	$action = 'OperationNotFound';
  }
  
+ $HttpService_obj=new HttpService($action);
+ $HttpService_obj->Execute();
  
- 
- switch($action){
- 
- 	case 'PublishBlog':
- 			//$json=$_REQUEST['Jsondata'];
- 			echo "teting";
- 			//$arry=json_decode($json,false,1);
- 			//$HttpService_obj->PublishBlog($arry, $arry[]);
- 		break;
-  	case 'GetMySubscribedMBlogs':
- 			echo "This operation not implemented Yet";
- 		break;
- 	case 'OperationNotFound':
- 			echo "The requested Operation not found in service, please check operation name";
- 		break;
- }
- 
- 
-
-
-
-
-

@@ -22,9 +22,8 @@ function App_GetControler()
 	
 	if($page != "SignIn" && !$this->GetCurrentUser()->IsUserAuthinticated())
 	{
-		
-		
-		 $URL= 'Home.php?Controler=SignIn';
+
+		$URL= 'Home.php?Controler=SignIn';
 		
 		echo $URL;
 		

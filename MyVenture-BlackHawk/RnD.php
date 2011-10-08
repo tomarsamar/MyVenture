@@ -7,24 +7,6 @@
 
  
  
- $svr = $_SERVER['DOCUMENT_ROOT'] ;// $_SERVER['SCRIPT_NAME'];
- 
- echo $svr;
- 
- function getroot($root, $svr) {
- 	if ($root!= $svr) {
- 		$root = $svr;
- 		$svr = preg_replace('/(\/.+\/?)/', "$2", $svr);
- 		if ($root!= $svr) {
- 			getroot($root, $svr);
- 		}
- 		else {
- 			echo $root . '/';
- 		}
- 	}
- }
- 
- getroot("", $svr);
  
  
 // foreach($_SERVER  as $v)
@@ -34,14 +16,14 @@
  	
 // }
  
- print_r($_ENV);
+ 
  
  
  
  $action = isset($_GET["action"]) ? $_GET["action"] : 'Showlogin';
  
  
- //echo $action;
+ echo $action;
  //print_r($_REQUEST);
  
  
@@ -111,6 +93,7 @@
  
  <head>
  <script src="public/scripts/jquery-1.6.4.js"  type="text/javascript" ></script>
+ <script src="public/scripts/json2.js"  type="text/javascript" ></script>
  
  </head>
  <form >
@@ -125,8 +108,20 @@
 	{
 
 		debugger;
-		var returnObj = $.ajax({url:"RnD.php?action=GetArray",data:{},error:erro,async:false});
 
+
+		var obj = {};
+		obj.a = "1234";
+		obj.b = "afafasas";
+
+		var str=JSON.stringify(obj);
+
+		
+		
+		var returnObj = $.ajax({url:"RnD.php?action=GsetArray",data:str,error:erro,async:false});
+
+
+		
 		var str=$.parseJSON(returnObj.responseText);
 		var ss="";
 		alert(str.result);
