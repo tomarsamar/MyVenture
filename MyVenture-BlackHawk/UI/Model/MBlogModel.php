@@ -12,10 +12,11 @@ namespace MyVenture\Model;
 class MBlogModel extends  \MyVenture\Contracts\AppModel{
 	
 	private $UID;
-	
-	function __construct($UID)
+	private $LastblogTime;
+	function __construct($UID,$LastblogTime)
 	{
 		$this->UID = $UID;
+		$this->LastblogTime = $LastblogTime;
 		
 	}
 	
@@ -25,7 +26,7 @@ class MBlogModel extends  \MyVenture\Contracts\AppModel{
 			
 			$commonServiceFacade = $commonFactoryObj->GetCommonServiceFacade();
 			
-			$arry = $commonServiceFacade->GetMySubscribedMBlogs($this->UID);
+			$arry = $commonServiceFacade->GetMySubscribedMBlogs($this->UID,$this->LastblogTime);
 			
 			return  $arry;
 	

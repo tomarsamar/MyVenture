@@ -42,13 +42,18 @@
  			case 'GetMySubscribedMBlogs':
  				
  				$json=$_REQUEST['UserDetails'];
- 					
- 				$arry=json_decode($json,false,1);
+ 				  
+ 				
+ 				$arry=json_decode($json);
  				
  				
- 				$arry = $this->GetMySubscribedMBlogs($arry["UserId"], $arry["LastMBlogTimeStamp"]);
+ 				//print_r($arry);
  				
- 				echo json_encode($arry);
+ 				$returnObj = $this->GetMySubscribedMBlogs($arry->UserId, $arry->LastblogTime);
+ 				
+ 				//print_r($returnObj);
+ 				
+ 				echo json_encode($returnObj);
  				
  				break;
  			case 'OperationNotFound':
@@ -68,9 +73,16 @@
 	
 	} 
 	
-	function GetMySubscribedMBlogs()
+	function GetMySubscribedMBlogs($UID,$LastblogTime)
 	{
 		
+		$commonFactoryObj = new \MyVenture\Factory\CommonFactory();
+			
+		$commonServiceFacade = $commonFactoryObj->GetCommonServiceFacade();
+			
+		$arry = $commonServiceFacade->GetMySubscribedMBlogs($UID,$LastblogTime);
+			
+		return  $arry;
 		
 		
 	}

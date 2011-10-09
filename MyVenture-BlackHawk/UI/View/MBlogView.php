@@ -125,8 +125,26 @@
         <div  style="height:10px;"></div>
         
 <div id="MblogContainer">
+       <script type="text/javascript">
+       
+       var LastblogTime ='<?php  
+       
+       $this->viewData-> rewind();
+       $this->viewData->valid();
+        $obj_t = $this->viewData ->current();
+        
+        //print_r($obj_t) ;
+        //exit;
+       echo $obj_t->dateOfCreation; ?>';
+       
+       </script>
+    	
+    	
+    	
     	<?php 
+    	
     	$this->viewData-> rewind();
+    	
       	while($this->viewData->valid())
         {
 
@@ -235,21 +253,38 @@
 
 function GetBlogs()
 {
-	
-	var objTotransfer = '{"UserId":"' +  user_Details.UId + '"."LastMBlogTimeStamp":"' + content + '"}';
-	
-	var returnObj = $.ajax({url:"\Services\HttpService.php\action=GetMySubscribedMBlogs",data:{"UserDetails" : objTotransfer},error:erro,async:false});
 
-	var returnJsonObj = $.parseJSON(returnObj.responseText);
+	debugger;
 
-	for(var i=0;returnJsonObj.length ; i++)
-	{
-		BlogDisplay_Obj.AddMBlog(returnJsonObj.Content,returnJsonObj.AuthorName,returnJsonObj.imgPath,returnJsonObj.adContent,returnJsonObj.adURL);
+
+	
+	var objTotransfer = '{"UserId":"' +  user_Details.UId + '","LastblogTime":"' + LastblogTime + '"}';
+	
+	var returnObj = $.ajax({url:"/MyVenture-BlackHawk/Services/HttpService.php?action=GetMySubscribedMBlogs",data:{"UserDetails" : objTotransfer},error:erro,async:false});
+
+	
+	if(returnObj.responseText != "null")
+		{
+
+
+		var returnJsonObj = $.parseJSON(returnObj.responseText);
+
+		if( returnJsonObj.length >0)
+		{
+			LastblogTime= returnJsonObj[0].dateOfCreation;
+		} 
+		
+		for(var i = returnJsonObj.length -1 ;i > -1 ;i--)
+		{
+			BlogDisplay_Obj.AddMBlog(returnJsonObj[i].Content,returnJsonObj[i].authorName,returnJsonObj[i].authorImg,returnJsonObj[i].adContent,returnJsonObj[i].adURL);
+		}
 	}
+
+	setTimeout(function(){ GetBlogs(); }, 1000 * 5 );
 }
 
 
-  setTimeout(function(){}, 1000 * 2 );
+  setTimeout(function(){ GetBlogs(); }, 1000 * 3 );
   
   
   function erro(rel,b,c)

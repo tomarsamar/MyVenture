@@ -13,7 +13,7 @@ interface ICommonFacade
 	 * @param  Integer UID
 	 * @return mixed
 	 */
-	public function GetMySubscribedMBlogs($UID);
+	public function GetMySubscribedMBlogs($UID,$LastblogTime);
 	
 	
 

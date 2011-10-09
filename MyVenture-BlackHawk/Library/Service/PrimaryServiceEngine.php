@@ -22,14 +22,14 @@ class PrimaryServiceEngine implements ICommonFacade
 	 */
 	
 	
-	public function GetMySubscribedMBlogs($UID)
+	public function GetMySubscribedMBlogs($UID,$LastblogTime)
 	{
 
 		
 		
 		$businessFacade= new \MyVenture\Facade\ BusinessEngine();
 
-		return	$businessFacade->GetMySubscribedMBlogs($UID);
+		return	$businessFacade->GetMySubscribedMBlogs($UID,$LastblogTime);
 
 	}
 

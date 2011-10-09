@@ -13,6 +13,7 @@ namespace MyVenture\Entities;
 		public $adContent;
 		public $adURL;
 		public $authorImg;
+		public $dateOfCreation;
 	
 	}
 }

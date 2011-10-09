@@ -112,6 +112,8 @@ class Statement_DbBlock implements IStatement
 	function executeAll()
 	{
 		
+		try{
+		
 		$this->statement->execute();
 			
 		
@@ -120,6 +122,14 @@ class Statement_DbBlock implements IStatement
 		//echo  "error  " . $this->statement->errorInfo();
 		
 		return $obj;
+		
+		}
+		catch(Exception $e){
+			
+			echo $e->getMessage();
+			
+		}
+		
 		
 	}
 	

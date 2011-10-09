@@ -34,19 +34,54 @@ class MBlog
 	 * 
 	 * 
 	 * */
-	public function GetMySubscribedMBlogs($UID)
+	public function GetMySubscribedMBlogs($UID,$LastblogTime)
 	{
 		//echo "in data layer";
 		
 		
-		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call USp_GetMBlogs(:_UID)");
+		if($LastblogTime != "")
+		{
+			
+			return	$this->test($UID,$LastblogTime);
+			
+		}
+		else{
+		//echo $UID;
+		
+		
+		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call USp_GetMBlogs(:_UID,:_lstBlogDate)");
+		
 		$stat->AddInParam(":_UID",$UID);
+		
+		
+		
+		if($LastblogTime == "")
+		{
+			$stat->AddInParam(":_lstBlogDate",null);
+		
+		}else
+		{
+			//echo "in real time blog fetch";
+			
+			$LastblogTime= '"' . $LastblogTime . '"';
+			
+			//echo $LastblogTime;
+			
+			$stat->AddInParam(":_lstBlogDate",$LastblogTime);
+			
+		}
+		
 		$array=$stat->executeAll();
+		
+		
+		//echo "above if block";
 		
 		
 		
 	if(count($array) > 1)
 	{
+		
+		//echo count($array);
 		//print_r($array);
 		
 		
@@ -69,6 +104,8 @@ class MBlog
 						$obj->adURL = $array[$i]['adUrl'];
 						
 						$obj->authorImg = $array[$i]['authorImg'];
+						
+						$obj->dateOfCreation = $array[$i]['DateOfCreation'];
 												
 						
 						$array_MBlog ->attach($obj);
@@ -84,6 +121,67 @@ class MBlog
 			return $array_MBlog;
 		
 		}
+	}
+	}
+	function test($UID,$lastDate)
+	{	try {
+		$dbh = new \PDO('mysql:host=localhost;dbname=MyVenture', "root", "kob115");
+		
+		$query='select a.content,a.id blogId,a.UID authorId,a.DateOfCreation,b.Name
+        authorName,b.imgUrl authorImg,c.AdContent adContent,c.URl adUrl from mblog a 
+    inner join user b on b.Uid = a.UID
+    inner join Adcontainer c on c.id = a.adId  
+    where
+    a.UID in (select following from connections where Uid ='  .   $UID . ') and  DateOfCreation > \'' . $lastDate .
+    '\'order by DateOfCreation desc
+    LIMIT 0,25;';
+		
+		//echo $query;
+		
+		$ss = $dbh->query($query);
+
+		//print_r($ss);
+		$array_MBlog = array();
+		
+		$i = 0;
+		
+		foreach($ss as $row) {
+			
+		
+			$obj= new \MyVenture\Entities\MBlog();
+				
+			$obj->authorName = $row['authorName'];
+				
+			$obj->Content = $row['content'];;
+				
+			$obj->ID = $row['blogId'];;
+				
+			$obj->authorUID = $row['authorId'];
+				
+			$obj->adContent = $row['adContent'];
+			
+			$obj->adURL = $row['adUrl'];
+			
+			$obj->authorImg = $row['authorImg'];
+			
+			$obj->dateOfCreation = $row['DateOfCreation'];
+			
+			
+			$array_MBlog[$i]= $obj ;
+			//print_r($row);
+			
+			$i++;
+		}
+		
+		
+		return $array_MBlog;
+		
+		$dbh = null;
+	} catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+	
 	}
 	
 	private function GetResult($query)

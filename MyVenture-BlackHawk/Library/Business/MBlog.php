@@ -26,13 +26,13 @@ public function PublishBlog($UID,$Content)
 	
 }
 	
-public function GetMySubscribedMBlogs($UID)
+public function GetMySubscribedMBlogs($UID,$LastblogTime)
 {
 	//echo "in business MBlog";
 	
 	 $obj= new \MyVenture\Data\MBlog();
 	 
-	return  $obj->GetMySubscribedMBlogs($UID);
+	return  $obj->GetMySubscribedMBlogs($UID,$LastblogTime);
 	 	
 }
 	

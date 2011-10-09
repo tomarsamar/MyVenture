@@ -26,12 +26,12 @@ class BusinessEngine implements ICommonFacade
      * @param  Integer UID
      * @return mixed
      */
-    public function GetMySubscribedMBlogs($UID)
+    public function GetMySubscribedMBlogs($UID,$LastblogTime)
     {
       
    		 $mBlogObj=new \MyVenture\Business\MBlog();
     	    	
-    	return $mBlogObj->GetMySubscribedMBlogs($UID);
+    	return $mBlogObj->GetMySubscribedMBlogs($UID,$LastblogTime);
     	
     	
     }

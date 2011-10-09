@@ -24,7 +24,7 @@
 
        		$UID = $_REQUEST["UserId"];
        	
-       		$MBlogModel_Obj = new \MyVenture\Model\MBlogModel($UID);
+       		$MBlogModel_Obj = new \MyVenture\Model\MBlogModel($UID,"");
        		
        		$viewData = $MBlogModel_Obj->Execute();
        		
