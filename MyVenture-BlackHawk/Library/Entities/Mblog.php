@@ -12,6 +12,7 @@ namespace MyVenture\Entities;
 		public $authorName;
 		public $adContent;
 		public $adURL;
+		public $authorImg;
 	
 	}
 }

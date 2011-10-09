@@ -96,9 +96,9 @@
 <div id="leftContent" class="leftPane">
    	   <div style="margin-left: 70px;margin-top: 70px;">
    	   		<table>
-   	   		<tr><td><a href="#" style="TEXT-DECORATION: none">Paras</a></td></tr>
+   	   		<tr><td><a href="#" style="TEXT-DECORATION: none" id="userName">Paras</a></td></tr>
    	   		<tr><td> <div style="height:10px;"></div>  </td></tr>
-   	   		<tr><td><img alt="" src="../../public/Image/007.jpg"  style="height:150px;width:150px"/></td></tr>
+   	   		<tr><td><img alt="" src="" id="userImg"  style="height:150px;width:150px"/></td></tr>
    	   		</table>
 		   	
 	   </div>  
@@ -122,26 +122,28 @@
     	$this->viewData-> rewind();
       	while($this->viewData->valid())
         {
-        ?>
+
+        $obj_t = $this->viewData ->current();
+         ?>
           
 	       <div id="MBlogs" class="MBlogTemplate">
 		       	<div id="imgContent">
-		       		<img  alt="" src="../../public/Image/007.jpg" id="authorImage"  />
+		       		<img  alt="" src=" <?php $obj_t->$authorImg ?> "  />
 		       	</div>
 		       		
 		       	<div id="BlogContentBox">
 			       	
-			       		<span id="AuthorName_template" class="AuthorName"> <?php  $obj_t = $this->viewData ->current();
-			       	
-			  		  echo   	$obj_t->authorName;
-			       	    	
+			       		<span id="AuthorName_template" class="AuthorName"> 
+			       	<?php 
+				  		  echo   	$obj_t->authorName;
+				       	    	
 						//echo get_class($obj_t); //MBlog
 			  		  
 			       	    ?> </span>
 			       		
 			       	<span id="BlogContent_template"  class="BlogContent"><?php echo $obj_t->Content;  $this->viewData->next(); ?>  	</span>
 			       	
-			       	<span id="AdContent_template"  class="AdContent">Ads: Motor Car, Chair car, You N me </span>
+			       	<span id="AdContent_template"  class="AdContent"> <a href="<?php $obj_t->adURL ?>"><?php $obj_t->adContent ?></a> </span>
 			       		
 		       	</div>
 	       </div>
@@ -155,6 +157,14 @@
   </div>
   <script type="text/javascript">
 
+	//set user name and img
+	
+	$("userName").get(0).src = user_Details.name;
+	
+	$("userImg").get(0).src = user_Details.imgURL
+
+	
+  
   var BlogDisplay_Type=function(){};
 
   BlogDisplay_Type.prototype={
@@ -213,7 +223,7 @@
 function GetBlogs()
 {
 	
-	var objTotransfer = '{"UserId":"' +  user_Details.$UId + '"."LastMBlogTimeStamp":"' + content + '"}';
+	var objTotransfer = '{"UserId":"' +  user_Details.UId + '"."LastMBlogTimeStamp":"' + content + '"}';
 	
 	var returnObj = $.ajax({url:"\Services\HttpService.php\action=GetMySubscribedMBlogs",data:{"UserDetails" : objTotransfer},error:erro,async:false});
 
