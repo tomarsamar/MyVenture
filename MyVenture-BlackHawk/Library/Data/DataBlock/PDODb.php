@@ -102,6 +102,7 @@ class Statement_DbBlock implements IStatement
 	
 	
 	public function __construct($statement){
+		
 		$this->Db_Con=DbFactory::GetDb(1);
 		$this->con=$this->Db_Con->GetConnection();
 		$this->statement=$this->con->prepare($statement);
@@ -112,7 +113,14 @@ class Statement_DbBlock implements IStatement
 	{
 		
 		$this->statement->execute();
-		return $this->statement->fetchAll();
+			
+		
+		$obj = $this->statement->fetchAll();
+		
+		//echo  "error  " . $this->statement->errorInfo();
+		
+		return $obj;
+		
 	}
 	
 	function AddInParam($name,$paramValue)

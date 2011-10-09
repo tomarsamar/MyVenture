@@ -1,14 +1,13 @@
-	
-   <?php
-        
-    namespace MyVenture\Controller;
-    
+	<?php
+
+	//TODO: see namespace problem
+    //namespace MyVenture\controler
     GlobalContext::GetCurrentGlobalContext()->App_LoadFile("AppControler", "/Library/Contracts/");
-    GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlogView", "/Library/Contracts/");
-    GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlogModel", "/Library/Contracts/");
+    GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlogView", "/UI/View/");
+    GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlogModel", "/UI/Model/");
     
     
-    class MBlogControler extends AppControler{
+    class MBlogControler extends \MyVenture\Contracts\AppControler{
    
        Private  $action;
        
@@ -21,15 +20,20 @@
        
        function Execute()
        {
-       		$MBlogModel_Obj = new \MyVenture\Model\MBlogModel();
+       	
+
+       		$UID = $_REQUEST["UserId"];
+       	
+       		$MBlogModel_Obj = new \MyVenture\Model\MBlogModel($UID);
        		
        		$viewData = $MBlogModel_Obj->Execute();
        		
-       		$appView_Obj = new \MyVenture\View\MBlogView($viewData);
+       		$appView_Obj = new MBlogView($viewData);
        		
        		$appView_Obj->Execute();
        	
        } 
+       
    	}
    	
    	
@@ -41,10 +45,11 @@
    		$action = 'DefaultAction';
    	}
    	
+   	  	
    	$MBlogControler_Obj=new MBlogControler($action);
    	
-   	$MBlogControler_Obj->Execute()
+   	$MBlogControler_Obj->Execute();
    	
    	
-   	?>
+   	
    		

@@ -4,7 +4,9 @@
  require_once '../GlobalConfig.php';
  require_once '../Global/Globals.php';
 
- GlobalContext::GetCurrentGlobalContext()->App_LoadFile("Mblog","/Library/Entities/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("Mblog","/Library/Entities/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("CommonFactory","/Library/Factory/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PrimaryServiceEngine","/Library/Service/");
 
  
  class HttpService{
@@ -20,15 +22,21 @@
  	public function Execute()
  	{
  		
- 		switch($action){
+ 		switch($this->action){
  		
  			case 'PublishBlog':
  				  
  				  $json=$_REQUEST['UserDetails'];
  				  
- 				  $arry=json_decode($json,false,1);
+ 				
+ 				  $arry=json_decode($json);
  				  
- 				  $HttpService_obj->PublishBlog($arry["UserId"], $arry["Content"]);
+ 				  
+ 				  
+ 				  $this->PublishBlog($arry->UserId, $arry->Content);
+ 				  
+ 				  
+ 				  echo '{"status":"OK"}';
  				  
  				break;
  			case 'GetMySubscribedMBlogs':

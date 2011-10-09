@@ -6,8 +6,8 @@ namespace MyVenture\Facade;
 
 use MyVenture\Contracts\ICommonFacade;
 
-require_once '../../Library/Contracts/ICommonFacade.php';
-require_once '../../Library/Business/MBlog.php';
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("ICommonFacade","/Library/Contracts/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlog","/Library/Business/");
 
 /**
  * Short description of class BusinessEngine
@@ -77,7 +77,7 @@ class BusinessEngine implements ICommonFacade
     {
         $mBlogObj=new \MyVenture\Business\MBlog();
     	    	
-    	return $mBlogObj->PublishMBlog($UID,$content);
+    	return $mBlogObj->PublishBlog($UID, $content) ;
     }
 
 } /* end of class BusinessEngine */

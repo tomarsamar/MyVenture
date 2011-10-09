@@ -6,9 +6,8 @@ use MyVenture\Contracts\ICommonFacade;
 
 
 
-require_once '../../Library/Contracts/ICommonFacade.php';
-require_once '../../Library/Facade/BusinessEngine.php';
-
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("ICommonFacade","/Library/Contracts/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("BusinessEngine","/Library/Facade/");
 
 class PrimaryServiceEngine implements ICommonFacade
 {

@@ -4,8 +4,8 @@
 namespace MyVenture\Data;
 
 
-require_once '../../Library/Entities/Mblog.php';
-require_once '../../Library/Data/DataBlock/mysqldatabase.php';
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("MBlog","/Library/Entities/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("mysqldatabase","/Library/Data/DataBlock/");
  \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PDODb", "/Library/Data/DataBlock/");
 
 class MBlog
@@ -17,7 +17,7 @@ class MBlog
 	
 	public function PublishBlog($UID,$Content)
 	{
-	
+		
 		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call Usp_PublishBlog(:_UID,:_Content)");
 		$stat->AddInParam(":_UID",$UID);
 		$stat->AddInParam(":_Content",$Content);
@@ -38,37 +38,53 @@ class MBlog
 	{
 		//echo "in data layer";
 		
+		
+		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call USp_GetMBlogs(:_UID)");
+		$stat->AddInParam(":_UID",$UID);
+		$array=$stat->executeAll();
+		
+		
+		
+	if(count($array) > 1)
+	{
+		//print_r($array);
+		
+		
 		$array_MBlog = new \SplObjectStorage();
 
-		$result = $this->GetResult("select * from mblog");
-				if($result)
-				{
-					while ($row = mysql_fetch_assoc($result)) {
+					for($i =0 ; $i < count($array); $i++) {
 						
 						$obj= new \MyVenture\Entities\MBlog();
 							
-						$obj->authorName = $row['Category'];
+						$obj->authorName = $array[$i]['authorName'];
 							
-						$obj->Content = $row['Content'];;
+						$obj->Content = $array[$i]['content'];;
 							
-						$obj->ID = $row['id'];;
+						$obj->ID = $array[$i]['blogId'];;
 							
-						$obj->UID = $row['UID'];;
+						$obj->authorUID = $array[$i]['authorId'];
 							
+						$obj->adContent = $array[$i]['adContent'];
+						
+						$obj->adURL = $array[$i]['adUrl'];
+						
+						$obj->authorImg = $array[$i]['authorImg'];
+												
+						
 						$array_MBlog ->attach($obj);
 						
 						
 					}
 					
-					mysql_free_result($result);
-				}
+			//		mysql_free_result($result);
+				
 			
-			mysql_close($this->con);
+		//	mysql_close($this->con);
 		
 			return $array_MBlog;
 		
+		}
 	}
-	
 	
 	private function GetResult($query)
 	{

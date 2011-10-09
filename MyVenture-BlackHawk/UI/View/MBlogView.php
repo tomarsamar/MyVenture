@@ -1,12 +1,16 @@
-	
 	<?php 
 	
 	
-	namespace MyVenture\View;
+	//namespace MyVenture\View;
+	
+	
 	
 	GlobalContext::GetCurrentGlobalContext()->App_LoadFile("AppView", "/Library/Contracts/");
 
-	class MBlogView extends AppView{
+	
+	
+	
+	class MBlogView extends \MyVenture\Contracts\AppView{
 
 		public $viewData; // contains  SplObjectStorage of  MyVenture\Entities\MBlog items 
 
@@ -18,6 +22,9 @@
 		
 		public  function Execute()
 		{
+			//debug symbols
+			//print_r($this->viewData);
+			//exit;
 			
 	?>
 	
@@ -73,7 +80,7 @@
 		{
 		
 			display:inline-block;
-			width:442px;
+			width:430px;
 		}
 		
 		.MBlogTemplate #imgContent ,.MBlogTemplate img
@@ -96,7 +103,7 @@
 <div id="leftContent" class="leftPane">
    	   <div style="margin-left: 70px;margin-top: 70px;">
    	   		<table>
-   	   		<tr><td><a href="#" style="TEXT-DECORATION: none" id="userName">Paras</a></td></tr>
+   	   		<tr><td><a href="#" style="TEXT-DECORATION: none" id="userName"></a></td></tr>
    	   		<tr><td> <div style="height:10px;"></div>  </td></tr>
    	   		<tr><td><img alt="" src="" id="userImg"  style="height:150px;width:150px"/></td></tr>
    	   		</table>
@@ -109,7 +116,7 @@
 	<div id="MBlogBox" class="MBlogBox" style="" >
 		<div><span style="font-family: Helvetica; font-weight: bold;color: #999;margin-left: 5px;" >Whats in your Mind : </span></div>
     	<div> 
-    		<div class="fltlft"><textarea rows="4" style="width:440px;margin-left: .5em;" id="txtArea_MBlog" maxlength="120" ></textarea> </div>
+    		<div class="fltlft"><textarea rows="4" style="width:420px;margin-left: .5em;" id="txtArea_MBlog" maxlength="120" ></textarea> </div>
     		<div class="fltrt" style="margin-left: 1px;"><input type="button" value="Update" style="height: 70px;color: #999;" onclick="javascript:BlogDisplay_Obj.PublishMBlog();" /></div>
     		<div class="clearfloat"></div>
        	</div>
@@ -128,7 +135,7 @@
           
 	       <div id="MBlogs" class="MBlogTemplate">
 		       	<div id="imgContent">
-		       		<img  alt="" src=" <?php $obj_t->$authorImg ?> "  />
+		       		<img  alt="" src=" <?php echo $obj_t->authorImg ?> "  />
 		       	</div>
 		       		
 		       	<div id="BlogContentBox">
@@ -143,7 +150,7 @@
 			       		
 			       	<span id="BlogContent_template"  class="BlogContent"><?php echo $obj_t->Content;  $this->viewData->next(); ?>  	</span>
 			       	
-			       	<span id="AdContent_template"  class="AdContent"> <a href="<?php $obj_t->adURL ?>"><?php $obj_t->adContent ?></a> </span>
+			       	<span id="AdContent_template"  class="AdContent"> <a href="javascript:BlogDisplay_Obj.OpenAdWindow('<?php echo $obj_t->adURL ?>')"><?php echo $obj_t->adContent ?> <span style="color: blue;">: AD</span></a></span>
 			       		
 		       	</div>
 	       </div>
@@ -158,22 +165,28 @@
   <script type="text/javascript">
 
 	//set user name and img
+	debugger;
 	
-	$("userName").get(0).src = user_Details.name;
+	$("#userName").get(0).innerText = user_Details.name;
 	
-	$("userImg").get(0).src = user_Details.imgURL
+	$("#userImg").get(0).src = user_Details.imgURL;
 
 	
   
   var BlogDisplay_Type=function(){};
 
-  BlogDisplay_Type.prototype={
-
+  BlogDisplay_Type.prototype={OpenAdWindow:function(url){
+	debugger;
+			window.open(url);
+	  
+	  },
 	AddMBlog:function (Content,AuthorName,imgPath,adContent,adUrl)
 	{
 		debugger;
 
-		var ad = "<a href='" + adUrl  + "'>" + adContent + "</a> ";
+		adUrl = "javascript:BlogDisplay_Obj.OpenAdWindow('" + adUrl + "')";
+		
+		var ad = '<a href="' + adUrl  + '">' + adContent + '</a> ';
 		
 		var templateObject = $("#MBlogs_template");
 
@@ -187,7 +200,7 @@
 
 	    $("#BlogContent_template",templateObject_obj).get(0).innerText = Content;
 
-	    $("#authorImage",templateObject_obj).get(0).src = imgPath;
+	    $("#authorImage",templateObject_obj).get(0).src = user_Details.imgURL;
 	
 	    $("#AdContent_template",templateObject_obj).get(0).innerHTML = ad;
 	    
@@ -200,11 +213,11 @@
 		
 		var content = $("#txtArea_MBlog").val();
 
-		var objTotransfer = '{"UserId":"' +  user_Details.$UId + '"."Content":"' + content + '"}';
+		var objTotransfer = '{"UserId":"' +  user_Details.UId + '","Content":"' + content + '"}';
 		
-		var returnObj = $.ajax({url:"\Services\HttpService.php\action=PublishBlog",data:{"UserDetails" : objTotransfer},error:erro,async:false});
+		var returnObj = $.ajax({url:"/MyVenture-BlackHawk/Services/HttpService.php?action=PublishBlog",data:{"UserDetails" : objTotransfer},error:erro,async:false});
 
-		var returnJsonObj=$.parseJSON(returnObj.responseText);
+		var returnJsonObj = $.parseJSON(returnObj.responseText);
 
 		$("#txtArea_MBlog").val("");
 
@@ -251,7 +264,7 @@ function GetBlogs()
   
    <div id="MBlogs_template" class="MBlogTemplate" style="display:none">
 		       	<div id="imgContent">
-		       		<img  alt="" src="../../public/Image/007.jpg" id="authorImage"  />
+		       		<img   id="authorImage"  />
 		       	</div>
 		       		
 		       	<div id="BlogContentBox">

@@ -2,14 +2,14 @@
 
 namespace MyVenture\Model;
 
-GlobalContext::GetCurrentGlobalContext()->App_LoadFile("ICommonFacade", "/Library/Contracts/");
-GlobalContext::GetCurrentGlobalContext()->App_LoadFile("CommonFactory", "/Library/Factory/");
-GlobalContext::GetCurrentGlobalContext()->App_LoadFile("AppModel", "/Library/Contracts/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("ICommonFacade", "/Library/Contracts/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("CommonFactory", "/Library/Factory/");
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("AppModel", "/Library/Contracts/");
 
 
-use MyVenture\Contracts;
 
-class MBlogModel extends  AppModel{
+
+class MBlogModel extends  \MyVenture\Contracts\AppModel{
 	
 	private $UID;
 	

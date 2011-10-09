@@ -1,15 +1,11 @@
 <?php
 namespace MyVenture\Contracts;
 
-class AppView{
+abstract class AppView{
 	
 	public  $viewData;
 	
-	public  abstract function  Execute()
-	{
-		
-		
-	}
+	public  abstract function  Execute();
 
 
 

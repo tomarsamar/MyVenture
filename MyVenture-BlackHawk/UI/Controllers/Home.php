@@ -29,8 +29,16 @@
       	       	 
       	
        $userDetails = json_encode(GlobalContext::GetCurrentGlobalContext()->GetCurrentUser());
-      	
-      	
+       
+       ?>
+       
+       <script type="text/javascript">
+       
+       var user_Details = $.parseJSON(' <?php echo $userDetails ?>');
+       var str="";
+       </script>
+  
+  	<?php     	
       	try{
       		
       		GlobalContext::GetCurrentGlobalContext()->App_GetControler();
@@ -48,12 +56,7 @@
     	
   	
   	?>
-  <script type="text/javascript">
-	debugger;
- 	 var user_Details = $.parseJSON(' <?php echo $userDetails ?>');
-	var str="";
-  </script>
-  
+   
    </div>
 		  <div class="footer">
 		    

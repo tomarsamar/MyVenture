@@ -2,9 +2,9 @@
 
 namespace MyVenture\Factory;
 
-require_once '../../Library/Service/PrimaryServiceEngine.php';
 
 
+\GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PrimaryServiceEngine","/Library/Service/");
 
 class CommonFactory{
 	

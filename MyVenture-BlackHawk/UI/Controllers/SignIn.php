@@ -126,7 +126,7 @@ switch($action){
 			$View_Data=new \MyVenture\Model\LoginModel();
 			$View_Data->error = TRUE;
 			$View_Data->erroMSG = Messages::$UserIdPassNotCorrect;
-			App_GetView('LoginView');
+			GlobalContext::GetCurrentGlobalContext()->App_GetView('LoginView');
 		}
 		
 		break;

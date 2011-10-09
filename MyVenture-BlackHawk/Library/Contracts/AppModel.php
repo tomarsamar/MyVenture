@@ -1,14 +1,8 @@
 <?php
 namespace MyVenture\Contracts;
 
-class AppModel{
+abstract class AppModel{
 	
-	abstract function  Execute()
-	{
-		
-		
-	}
-
-
+	abstract function  Execute();
 
 }
