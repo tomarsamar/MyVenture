@@ -2,8 +2,15 @@
 
 
  require_once 'GlobalConfig.php';
+ require_once 'Global/Globals.php';
 
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("Mblog","/Library/Entities/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("CommonFactory","/Library/Factory/");
+ \GlobalContext::GetCurrentGlobalContext()->App_LoadFile("PrimaryServiceEngine","/Library/Service/");
+ 
+ 
  require_once '/Library/Data/DataBlock/PDODb.php';
+ 
 
  
  
@@ -16,7 +23,7 @@
  	
 // }
  
- 
+  error_reporting(-1);
  
  
  
@@ -31,7 +38,9 @@
  switch($action){
  
  	case 'GetArray':
- 		PublishBlog("123","just testing the things");
+ 		//PublishBlog("1","just testing the things");
+ 		
+ 		test();
  		
  		$arr = array("result" => "Ok", "msg"=>"done");
  		$str=json_encode($arr);
@@ -54,9 +63,97 @@
  function PublishBlog($UID,$content)
  {
  
- 	$commonFacade = MyVenture\Factory\CommonFactory::GetCommonServiceFacade();
+ 	$commonFacade = \MyVenture\Factory\CommonFactory::GetCommonServiceFacade();
  	$commonFacade->PublishMBlog($UID, $content);
  
+ }
+ 
+ 
+ function test()
+ {
+ 	try{
+ 		
+ 		
+ 	
+ 	//$dbh = new \PDO('mysql:host=localhost;dbname=MyVenture', "root", "kob115");
+ 	
+ 	/*$query='select a.content,a.id blogId,a.UID authorId,a.DateOfCreation,b.Name
+        authorName,b.imgUrl authorImg,c.AdContent adContent,c.URl adUrl from mblog a 
+    inner join user b on b.Uid = a.UID
+    inner join Adcontainer c on c.id = a.adId  
+    where
+    a.UID in (select following from connections where Uid ='  .   '1' . ') and  DateOfCreation > ' . $a .
+    'order by DateOfCreation desc
+    LIMIT 0,25;';
+		
+ 	
+ 	
+ 	//echo $query;
+ 	
+ 	$ss = $dbh->query($query);
+ 	
+ 	
+ 	
+ print_r($dbh->errorInfo());	
+ print_r($dbh->errorCode());
+ 	*/
+ 	
+ 	
+ 	$json=$_REQUEST['UserDetails'];
+ 		
+ 		
+ 	$arry=json_decode($json);
+ 		
+ 		
+ 	//print_r($arry);
+ 		
+ 		$commonFactoryObj = new \MyVenture\Factory\CommonFactory();
+			
+		$commonServiceFacade = $commonFactoryObj->GetCommonServiceFacade();
+			
+		$arry1 = $commonServiceFacade->GetMySubscribedMBlogs($arry->UserId, $arry->LastblogTime);
+			
+ 		
+ 	//print_r($returnObj);
+ 		
+ 	echo json_encode(	$arry1);
+ 	
+ 	
+ 	
+ 	
+ 	
+ //	$stat= $dbh->prepare("call USp_GetMBlogs(:_UID,:_lstBlogDate)");
+ 	//$a='2011-10-09 06:35:36';
+ 	//$b=1;
+ 	
+ 	//$stat->bindParam(":_lstBlogDate",$a);
+
+ 	//$stat->bindParam(":_UID",$b);
+ 	
+ 	//$stat->execute();
+ 	
+ 	//print_r($stat->fetchAll()); 
+ 	//print_r($ss);
+ 	
+ 	//print_r($dbh->errorInfo());
+ 	//print_r($dbh->errorCode());
+ 	
+ 	
+ 	
+ 	$array_MBlog = array();
+ 	
+ 	$i = 0;
+ 	
+ 	
+ 	
+ 	return $array_MBlog;
+ 	
+ 	$dbh = null;
+ 	} catch (PDOException $e) {
+ 		print "Error!: " . $e->getMessage() . "<br/>";
+ 		die();
+ 	}
+ 	
  }
  
  //$dsn = 'mysql:dbname=' .  Global_Config_DataBaseName .   ';host=' . Global_Config_DatabaseServerName ;
@@ -96,9 +193,11 @@
  <script src="public/scripts/json2.js"  type="text/javascript" ></script>
  
  </head>
- <form >
+ <form method="post" action="rnd.php?action=GetArray">
  
- <input type="button" onclick="javascript:TestService();" value="test" />
+ <input type="submit" onclick="javascript:TestService();" value="test" />
+ <input type="text" name="UserDetails" id="UserDetails"  value="" />
+ 
  
  </form>
  
@@ -109,8 +208,19 @@
 
 		debugger;
 
+		LastblogTime='2011-10-09 18:57:24';
+		var objTotransfer = '{"UserId":"1","LastblogTime":"' + LastblogTime + '"}';
 
-		var obj = {};
+		
+
+
+			$("#UserDetails").val(objTotransfer);
+		
+
+		
+
+		
+/*		var obj = {};
 		obj.a = "1234";
 		obj.b = "afafasas";
 
@@ -120,7 +230,7 @@
 		
 		var returnObj = $.ajax({url:"RnD.php?action=GsetArray",data:str,error:erro,async:false});
 
-
+*/
 		
 		var str=$.parseJSON(returnObj.responseText);
 		var ss="";

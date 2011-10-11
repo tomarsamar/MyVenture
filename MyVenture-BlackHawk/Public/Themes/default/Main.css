@@ -3,7 +3,8 @@
 <!--
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background: #000;
+ /*	background-image:url(../Images/MySite_back.jpg); */
+	background-color:#EEEFF2;
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -16,8 +17,8 @@ ul, ol, dl { /* Due to variations between browsers, it's best practices to zero 
 }
 h1, h2, h3, h4, h5, h6, p {
 	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+	padding-right: 0px;
+	padding-left: 0px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
 }
 a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
 	border: none;
@@ -38,7 +39,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 /* ~~ this fixed width container surrounds the other divs ~~ */
 .container {
 	width: 100%;
-	background: #000;
+	
 	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	height: 100%;
 }
@@ -46,27 +47,21 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 /* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
 .header {
 	
-	background:#000;
+	background-image: url(http://momentskis.com/static/img/misc/header_bg.png);
+	background-repeat-x: repeat;
+	background-repeat-y: no-repeat;
+	background-attachment: initial;
+	background-position-x: 0%;
+	background-position-y: 100%;
+	background-origin: initial;
+	background-clip: initial;
+	background-color: #D3D2CC;
 	height:50px;
-	width:100%;
-	
+	width: 1024px;
+	margin: auto;
 
 }
 
-.leftPane{
-
-width:501px;
-float: left;
-
-}
-
-.righttPane{
- float: right;
- height:550px;
- width:518px;
- margin: 0 2px;
- 
-}
 
 
 html{
@@ -85,20 +80,36 @@ direction: ltr;
 
 .content {
 
+	
 	margin: auto;
-	border-radius:5px;
+/*	border-radius:5px; */  
 	width: 1024px;
 	height:550px;
-	background: #FFF;
+/*	background: #FFF; */
+
+background-color: transparent;
+background-color:#FAFAFA;;
+
+		 
 	 
 }
 
 /* ~~ The footer ~~ */
 .footer {
-	
-	background:#000;
 	height:40px;
-	width:100%;
+	background-image: url(http://momentskis.com/static/img/misc/header_bg.png);
+	background-repeat-x: repeat;
+	background-repeat-y: no-repeat;
+	background-attachment: initial;
+	background-position-x: 0%;
+	background-position-y: 100%;
+	background-origin: initial;
+	background-clip: initial;
+	background-color: #D3D2CC;
+	margin: auto;
+/*	border-radius:5px; */  
+	width: 1024px;
+		
 	
 }
 
@@ -107,7 +118,7 @@ direction: ltr;
 	float: right;
 	
 
-	margin-left: 2px;
+	margin-left: 0px;
 }
 .fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
 	float: left;

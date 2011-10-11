@@ -13,6 +13,21 @@ display:inline-block;
 margin:0 0 1.0em;
 
 }
+.leftPane{
+
+width:501px;
+float: left;
+
+}
+
+.righttPane{
+ float: right;
+ height:550px;
+ width:518px;
+ margin: 0 2px;
+ 
+}
+
 
 .LoginBox input[type="text"],.LoginBox input[type="password"]
 {

@@ -39,15 +39,6 @@ class MBlog
 		//echo "in data layer";
 		
 		
-		if($LastblogTime != "")
-		{
-			
-			return	$this->test($UID,$LastblogTime);
-			
-		}
-		else{
-		//echo $UID;
-		
 		
 		$stat= \MyVenture\Data\DbFactory::GetStatement(1,"call USp_GetMBlogs(:_UID,:_lstBlogDate)");
 		
@@ -62,8 +53,26 @@ class MBlog
 		}else
 		{
 			//echo "in real time blog fetch";
+
+		/*	$dbh = new \PDO('mysql:host=localhost;dbname=MyVenture', "root", "kob115");
+			$stat= $dbh->prepare("call USp_GetMBlogs(:_UID,:_lstBlogDate)");
+			//$a='2011-10-09 06:35:36';
+			//$b=1;
 			
-			$LastblogTime= '"' . $LastblogTime . '"';
+			$stat->bindParam(":_lstBlogDate",$LastblogTime);
+			
+			$stat->bindParam(":_UID",$UID);
+			
+			$stat->execute();
+			
+			print_r($stat->fetchAll());
+			//print_r($ss);
+			
+			print_r($dbh->errorInfo());
+			print_r($dbh->errorCode());
+			*/
+			
+			//$LastblogTime= '"' . $LastblogTime . '"';
 			
 			//echo $LastblogTime;
 			
@@ -73,6 +82,7 @@ class MBlog
 		
 		$array=$stat->executeAll();
 		
+		print_r($array);
 		
 		//echo "above if block";
 		
@@ -122,7 +132,7 @@ class MBlog
 		
 		}
 	}
-	}
+	
 	function test($UID,$lastDate)
 	{	try {
 		$dbh = new \PDO('mysql:host=localhost;dbname=MyVenture', "root", "kob115");

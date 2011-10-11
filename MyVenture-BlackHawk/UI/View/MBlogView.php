@@ -34,15 +34,14 @@
 	
 		.MBlogBox
 		{
-			
 			height: 120px;
-			background-color:#EDEBD5;
+			background-color:whiteSmoke;
 			
 		}
 		
 		
 		.MBlogTemplate{
-				border-bottom: 1px solid #ebebeb;;
+			border-bottom: 1px solid #ebebeb;;
 		
 		}
 		
@@ -54,18 +53,15 @@
 		
 		.MBlogTemplate .AuthorName
 		{
-		font-weight:bold;
-		font-family:Helvetica;
+			font-weight:bold;
+			font-family:Helvetica;
 		
 		}
 		
 		#MblogContainer{
 		
-		overflow: auto;
-		height:418px;
-			
-		
-		
+			overflow: auto;
+			height:418px;
 		}
 		
 		.MBlogTemplate .AdContent
@@ -74,6 +70,25 @@
 			color: blue;
 			display:block;
 			margin:0 0 1.5em;
+		}
+		
+		.leftPane{
+
+		width:300px;
+		display:inline-block;
+		height:100%;
+		background-color: #D6C3C4;
+
+		}
+
+		.righttPane{
+			display:inline-block;
+		 	height:550px;
+		 	width:550px;
+			margin: 0 0 0 0;
+		 	border-right-color: #999;
+			border-right-style: solid;
+			border-right-width: 1px;
 		}
 		
 		.MBlogTemplate #BlogContentBox
@@ -91,21 +106,16 @@
 			vertical-align:top;
 			margin: .25em;
 		}
-	.righttPane{
 	
-		border-left-color: #999;
-			border-left-style: solid;
-			border-left-width: 1px;
-	}
 	
 	</style>
-<div>
-<div id="leftContent" class="leftPane">
-   	   <div style="margin-left: 70px;margin-top: 70px;">
+<div style="height: 100%;">
+<div id="leftContent"  style="margin-left: 118px;" class="leftPane">
+   	   <div style="margin-left: 20px;">
    	   		<table>
    	   		<tr><td><a href="#" style="TEXT-DECORATION: none" id="userName"></a></td></tr>
-   	   		<tr><td> <div style="height:10px;"></div>  </td></tr>
-   	   		<tr><td><img alt="" src="" id="userImg"  style="height:150px;width:150px"/></td></tr>
+   	   		<tr><td> <div style="height:2px;"></div>  </td></tr>
+   	   		<tr><td><img alt="" src="" id="userImg"  style="height:100px;width:100px"/></td></tr>
    	   		</table>
 		   	
 	   </div>  
@@ -180,6 +190,16 @@
        </div>
      </div>  
   </div>
+  
+   <form method="post" action="/MyVenture-BlackHawk/Services/HttpService.php?action=GetMySubscribedMBlogs">
+ 
+ <input type="submit" onclick="javascript:GetBlogs();" value="test" />
+ <input type="text" name="UserDetails" id="UserDetails"  value="" />
+ 
+ 
+ </form>
+  
+  
   <script type="text/javascript">
 
 	//set user name and img
@@ -256,9 +276,11 @@ function GetBlogs()
 
 	debugger;
 
-
-	
 	var objTotransfer = '{"UserId":"' +  user_Details.UId + '","LastblogTime":"' + LastblogTime + '"}';
+	
+	$("#UserDetails").val(objTotransfer);
+	
+	return true;
 	
 	var returnObj = $.ajax({url:"/MyVenture-BlackHawk/Services/HttpService.php?action=GetMySubscribedMBlogs",data:{"UserDetails" : objTotransfer},error:erro,async:false});
 
