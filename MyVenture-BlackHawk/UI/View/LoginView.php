@@ -16,7 +16,7 @@ if($View_Data->error){
 <?php }?>
 
 <form action="Home.php?Controlar=SignIn&action=login&Param=1" method="post">
-	<div id="textBoxHolder" class="LoginBox">
+	<div id="textBoxHolder" class="LoginBox-sdadsdsda">
 	<h2>
 		Sign In
 	</h2>
